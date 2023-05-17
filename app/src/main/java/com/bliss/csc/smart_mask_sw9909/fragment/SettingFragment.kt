@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bliss.csc.smart_mask_sw9909.R
+import com.bliss.csc.smart_mask_sw9909.databinding.ItemMainBinding
 import com.bliss.csc.smart_mask_sw9909.databinding.SettingFragmentBinding
 import com.bliss.csc.smart_mask_sw9909.fragment.recyclerview.MyAdapter
 
@@ -53,12 +54,14 @@ class SettingFragment: Fragment() {
 
         //recyclerView 출력
         val datas = mutableListOf<String>()
-        for(i in 1..10){
+        for(i in 1..20){
             datas.add("Item $i")
         }
-        binding.devicesRecyclerView.layoutManager = LinearLayoutManager(this)
-        binding.devicesRecyclerView.adapter = MyAdapter(datas)
-        binding.devicesRecyclerView.addItemDecoration((DividerItemDecoration(this, LinearLayoutManager.VERTICAL)))
+        val adapter = MyAdapter(datas)
+        val layoutManager = LinearLayoutManager(activity)
+
+        binding.devicesRecyclerView.layoutManager = layoutManager
+        binding.devicesRecyclerView.adapter = adapter
 
         return binding.root
     }
