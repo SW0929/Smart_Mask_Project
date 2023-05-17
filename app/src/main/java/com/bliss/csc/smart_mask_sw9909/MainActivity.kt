@@ -33,6 +33,8 @@ class MainActivity : AppCompatActivity() {
             tab.setIcon(iconList[position])
         }.attach()
 
+
+
 /*
         //tabLayout 객체 생성 및 탭 버튼 생성 코드
         val settingTap : TabLayout.Tab = binding.tabs.newTab()
