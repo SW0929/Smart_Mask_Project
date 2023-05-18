@@ -7,11 +7,11 @@
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
-            <value value="C:\Users\sw\.android\avd\smart_Mask.avd" />
+            <value value="C:\Users\sjuga\.android\avd\Smart_Mask_Project.avd" />
           </Key>
         </deviceKey>
       </Target>
     </targetSelectedWithDropDown>
-    <timeTargetWasSelectedWithDropDown value="2023-05-17T04:37:48.799067600Z" />
+    <timeTargetWasSelectedWithDropDown value="2023-05-18T09:20:01.628879300Z" />
   </component>
 </project>
