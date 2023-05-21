@@ -2,13 +2,67 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <CalendarView
+        android:id="@+id/calendarView"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/recordQueryButton"
+        android:layout_width="0dp"
+        android:text="기록 조회하기"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/calendarView"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:layout_height="wrap_content"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/recordView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recordQueryButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!--수면 시작/종료 시간
+            총 수면
+            코콜이 횟수
+            평균 온도
+        -->
+
+        <TextView
+            android:id="@+id/dateTextView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            tools:text="2023/05/20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/startSleepTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/endSleepTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/totalSleepTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
