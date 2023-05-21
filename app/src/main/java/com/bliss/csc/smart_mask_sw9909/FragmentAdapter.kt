@@ -28,6 +28,4 @@ class FragmentAdapter(activity: FragmentActivity): FragmentStateAdapter(activity
         else -> InfoFragment()
     }
 
-
-
 }
