@@ -10,14 +10,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.RadioButton
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bliss.csc.smart_mask_sw9909.R
-import com.bliss.csc.smart_mask_sw9909.databinding.ItemMainBinding
 import com.bliss.csc.smart_mask_sw9909.databinding.SettingFragmentBinding
 import com.bliss.csc.smart_mask_sw9909.fragment.recyclerview.MyAdapter
 import java.io.IOException
