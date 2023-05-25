@@ -61,7 +61,7 @@ class InfoFragment: Fragment() {
 
                             // ChatBot 텍스트에 다른 색상 적용
                             spannableString.setSpan(
-                                ForegroundColorSpan(Color.GREEN),
+                                ForegroundColorSpan(Color.rgb(100, 149, 237)),
                                 userText.length, // 시작 인덱스
                                 spannableString.length, // 끝 인덱스
                                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
