@@ -29,6 +29,9 @@ class CalendarFragment: Fragment() {
             binding.dateTextView.text = "$year/${(month+1)}/$dayOfMonth"
         }
 
+        binding.recordQueryButton.setOnClickListener {
+
+        }
 
 
 
