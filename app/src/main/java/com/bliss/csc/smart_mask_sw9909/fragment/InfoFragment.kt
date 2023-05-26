@@ -30,7 +30,7 @@ class InfoFragment: Fragment() {
 
         // recyclerView 사용
 
-        val apiKey = "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" // todo 개인 gpt 키 사용
+        val apiKey = "********" // todo 개인 gpt 키 사용
         val baseUrl = "https://api.openai.com/v1/chat/completions"
         val chatGptModel = "gpt-3.5-turbo" // 또는 원하는 ChatGPT 모델 지정
 
