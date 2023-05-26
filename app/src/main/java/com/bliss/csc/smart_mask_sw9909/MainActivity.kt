@@ -2,6 +2,7 @@ package com.bliss.csc.smart_mask_sw9909
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import com.bliss.csc.smart_mask_sw9909.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -12,6 +13,8 @@ class MainActivity : AppCompatActivity() {
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
 
         val textList = arrayListOf("Setting", "Calendar", "Alarm", "Information")
         val iconList = listOf(
