@@ -19,8 +19,8 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:text="기록 조회하기"
         android:background="@drawable/button"
+        android:text="기록 조회하기"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/calendarView"
@@ -30,18 +30,21 @@
         android:id="@+id/dateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold"
         android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/recordView"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/recordQueryButton"
-        app:layout_constraintBottom_toTopOf="@id/recordView"
         tools:text="2023/05/20" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/recordView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -70,15 +73,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="수면 시작 시간"
-                android:textSize="25sp" />
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/startSleepValueTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:text="ex)12:00:00"
                 android:textSize="20sp"
-                android:text="123"
                 tools:text="07시07분" />
 
         </LinearLayout>
@@ -97,15 +102,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="수면 종료 시간"
-                android:textSize="25sp" />
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/endSleepValueTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:text="ex)12:00:00"
                 android:textSize="20sp"
-                android:text="123"
                 tools:text="07시07분" />
 
         </LinearLayout>
@@ -127,14 +134,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="총 수면 시간"
-                android:textSize="25sp" />
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/totalSleepValueTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="123"
+                android:text="ex)00:40:10"
                 android:textSize="20sp"
                 tools:text="07시07분" />
 
@@ -154,15 +163,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="코골이 횟수"
-                android:textSize="25sp" />
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/snoreValueTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:text="ex)10회"
                 android:textSize="20sp"
-                android:text="123"
                 tools:text="11회" />
 
         </LinearLayout>
@@ -181,16 +192,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="평균 체온"
-                android:textSize="25sp" />
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/temValueTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="123"
+                android:text="ex)36.5°C"
                 android:textSize="20sp"
-                tools:text="36.5" />
+                tools:text="36.5°C" />
 
         </LinearLayout>
 

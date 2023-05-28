@@ -3,13 +3,17 @@ package com.bliss.csc.smart_mask_sw9909
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import com.bliss.csc.smart_mask_sw9909.Database.DatabaseHelper
 import com.bliss.csc.smart_mask_sw9909.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MainActivity : AppCompatActivity() {
+    lateinit var databaseHelper: DatabaseHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        databaseHelper = DatabaseHelper(this)
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
