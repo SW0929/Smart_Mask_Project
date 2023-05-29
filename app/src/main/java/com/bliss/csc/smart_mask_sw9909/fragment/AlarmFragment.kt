@@ -14,13 +14,14 @@ import android.view.ViewGroup
 import android.widget.TimePicker
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.bliss.csc.smart_mask_sw9909.Database.DatabaseHelper
 import com.bliss.csc.smart_mask_sw9909.databinding.AlarmFragmentBinding
 import com.bliss.csc.smart_mask_sw9909.fragment.alarm.AlarmReceiver
 import java.text.SimpleDateFormat
 import java.util.*
 
 class AlarmFragment: Fragment(){
-
+    private lateinit var databaseHelper: DatabaseHelper
     lateinit var binding: AlarmFragmentBinding
 
 
@@ -31,9 +32,6 @@ class AlarmFragment: Fragment(){
     var pauseTime = 0L
 
     //mNow, mDate, mFormat 은 현재 시간을 구하기 위한 변수
-   var mNow: Long = 0
-    var mDate: Date? = null
-    var mFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,49 +39,80 @@ class AlarmFragment: Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         binding = AlarmFragmentBinding.inflate(inflater, container, false)
-
+        val context = requireContext()
+        databaseHelper = DatabaseHelper(context)
         alarmManager = context?.getSystemService(ALARM_SERVICE) as AlarmManager
 
-
+        var currentDate: String? = null
 
         //수면 시작 버튼을 누르면 stopWatch 처럼 시간 증가(총 수면 시간을 구할 수 있음)
         binding.sleepStartButton.setOnClickListener {
+            currentDate = getCurrentDate()
+            val currentTime_start = getCurrentTime()
             binding.chronometer.base = SystemClock.elapsedRealtime() + pauseTime
             binding.chronometer.start()
 
+            databaseHelper.insertData_user(currentDate, currentTime_start) //수면시작버튼 클릭 시
+            Toast.makeText(this.context, "TODAY($currentDate) 수면기록이 시작되었습니다.", Toast.LENGTH_SHORT).show()
+            //--> 센서 작동ON Function
         }
 
         //수면 종료
         binding.sleepEndButton.setOnClickListener {
-
+            val currentTime_finish = getCurrentTime()
+            val selectdate = currentDate
+            println("수면 시작 시간: $selectdate")
             pauseTime = binding.chronometer.base - SystemClock.elapsedRealtime()
             //binding.sleepEndTimeTextView.text = getTime() -> 현재 시간
+
+            val recordtime = databaseHelper.getSleepstart(selectdate.toString()) //오늘날짜의 수면시작시간을 GET(종료버튼 클릭 시 필요한 변수)
+            val recordedTimeToSeconds = databaseHelper.convertToSeconds(recordtime.toString()) //기록된 sleepstart를 초로 환산한 값
+            val currenttimetoSeconds = databaseHelper.convertToSeconds(currentTime_finish) //수면종료시간(sleepfinish)을 초로 환산한 값
+            val converttime = databaseHelper.convertToTime(currenttimetoSeconds-recordedTimeToSeconds) //update (총수면시간)
+            //val averagetemp = databaseHelper.gettempAverage(currentDate) //기록된 온도값들의 평균값 계산
+            //val countnose :Int= databaseHelper.getNoseCount(currentDate) //기록된 코골이값들을 COUNT
+
+            println("수면 시작 시간: $recordtime")
+            println("수면시작시간의 초환산 값: $recordedTimeToSeconds")
+            println("수면 종료 시간: $currentTime_finish")
+            println("수면종료시간의 초환산 값: $currenttimetoSeconds")
+            println("총수면시간: $converttime")
+            //println("평균온도값: $averagetemp")
+            //println("코골이 횟수 count: $countnose")
+
+            databaseHelper.updateSleepfinish(selectdate.toString(), recordtime.toString(), currentTime_finish) //수면종료버튼 클릭 시
+            Toast.makeText(this.context, "TODAY($currentDate) 수면기록이 종료되었습니다.", Toast.LENGTH_SHORT).show()
+            //--> 센서 작동OFF Function
+
             binding.chronometer.stop()
         }
 
 
         //초기화
         binding.sleepResetButton.setOnClickListener {
+            val currentDate = getCurrentDate()
 
             pauseTime = 0L
             binding.chronometer.base = SystemClock.elapsedRealtime()
             binding.chronometer.stop()
+
+            databaseHelper.deleteData(currentDate) //User, Sound, Temp table 삭제
+            Toast.makeText(this.context, "TODAY($currentDate) 날짜의 수면기록이 삭제되었습니다.", Toast.LENGTH_SHORT).show()
+            //--> 센서 작동OFF Function
         }
 
         binding.alarmStartButton.setOnClickListener {
             setAlarm()
+
+            val currentDate = getCurrentDate()
+
+            val alarmTime = String.format("%02d:%02d", binding.timePicker.hour, binding.timePicker.minute)
+            println("설정한 알람 시간: $alarmTime")
+            databaseHelper.updateSleepfinish(currentDate, alarmTime) //User table col(알람시간) UPDATE
         }
 
 
         return binding.root
-    }
-
-
-    //현재 시간
-    private fun getTime(): String? {
-        mNow = System.currentTimeMillis()
-        mDate = Date(mNow)
-        return mFormat.format(mDate)
     }
 
     private fun setAlarm() {
@@ -101,4 +130,16 @@ class AlarmFragment: Fragment(){
         Toast.makeText(this.context, "알람이 설정되었습니다.", Toast.LENGTH_SHORT).show()
     }
 
+    //현재 날짜 구하는 Function
+    fun getCurrentDate(): String {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val currentDate = Date()
+        return dateFormat.format(currentDate)
+    }
+    //현재 시간 구하는 Function
+    fun getCurrentTime(): String {
+        val timeFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+        val currentTime = Date()
+        return timeFormat.format(currentTime)
+    }
 }

@@ -30,9 +30,9 @@ class SettingFragment: Fragment() {
 
     var a: String = "as"
     lateinit var device: BluetoothDevice
-    lateinit var socket: BluetoothSocket
-    lateinit var outputStream: OutputStream
-    lateinit var inputStream: InputStream
+    var socket: BluetoothSocket? = null
+    var outputStream: OutputStream? = null
+    var inputStream: InputStream? = null
 
     private val TAG = "BluetoothExample"
     private val DEVICE_ADDRESS = "98:DA:60:05:04:8D" // 아두이노 블루투스 모듈의 MAC 주소
@@ -134,22 +134,24 @@ class SettingFragment: Fragment() {
         override fun run() {
             try {
                 socket = device.createRfcommSocketToServiceRecord(MY_UUID)
-                socket.connect()
+                socket?.connect()
                 Log.d(TAG, "Bluetooth connection established.")
 
-                outputStream = socket.outputStream
-                inputStream = socket.inputStream
+                outputStream = socket?.outputStream
+                inputStream = socket?.inputStream
 
                 // 여기서부터 아두이노와의 통신 코드를 작성합니다.
                 // 예를 들어, 아두이노로 데이터를 전송하려면 다음과 같이 사용합니다:
                 val dataToSend = "Hello, Arduino!\n".toByteArray()
-                outputStream.write(dataToSend)
+                outputStream?.write(dataToSend)
 
                 // 아두이노로부터 데이터를 수신하려면 다음과 같이 사용합니다:
                 val buffer = ByteArray(1024)
-                val bytes = inputStream.read(buffer)
-                val receivedData = String(buffer, 0, bytes)
-                a = receivedData
+                val bytes = inputStream?.read(buffer)
+                val receivedData = bytes?.let { String(buffer, 0, it) }
+                if (receivedData != null) {
+                    a = receivedData
+                }
                 Log.d(TAG, "Received data: $receivedData")
 
             } catch (e: IOException) {
@@ -162,13 +164,12 @@ class SettingFragment: Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         try {
-            outputStream.close()
-            inputStream.close()
-            socket.close()
+            outputStream?.close()
+            inputStream?.close()
+            socket?.close()
         } catch (e: IOException) {
             Log.e(TAG, "Failed to close the Bluetooth socket.", e)
         }
     }
-
 }
 
