@@ -73,6 +73,13 @@ class SettingFragment: Fragment() {
             binding.bluetoothOnButton.setBackgroundColor(Color.rgb(153,255,204))
             binding.bluetoothOffButton.setBackgroundColor(Color.WHITE)
         }
+        binding.bluetoothOffButton.setOnClickListener {
+            //TODO bluetooth 해제 코드 작성
+            onDestroyView()
+            binding.bluetoothOffButton.setBackgroundColor(Color.rgb(153,255,204))
+            binding.bluetoothOnButton.setBackgroundColor(Color.WHITE)
+            Log.d("off", "off is selected")
+        }
 
 
 
@@ -113,16 +120,6 @@ class SettingFragment: Fragment() {
         }
     }
 
-    fun bluetoothEnd(){
-        binding.bluetoothOffButton.setOnClickListener {
-            //TODO bluetooth 해제 코드 작성
-            onDestroyView()
-            binding.bluetoothOffButton.setBackgroundColor(Color.rgb(153,255,204))
-            binding.bluetoothOnButton.setBackgroundColor(Color.WHITE)
-            Log.d("off", "off is selected")
-        }
-    }
-
 
     //bluetooth Thread
     inner class ConnectThread : Thread() {
@@ -138,7 +135,7 @@ class SettingFragment: Fragment() {
 
                 // 여기서부터 아두이노와의 통신 코드를 작성합니다.
                 // 예를 들어, 아두이노로 데이터를 전송하려면 다음과 같이 사용합니다:
-                val dataToSend = "Hello, Arduino!\n".toByteArray()
+                val dataToSend = "s\n".toByteArray()
                 outputStream?.write(dataToSend)
 
                 // 아두이노로부터 데이터를 수신하려면 다음과 같이 사용합니다:

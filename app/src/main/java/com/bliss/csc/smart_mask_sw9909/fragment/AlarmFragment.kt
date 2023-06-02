@@ -60,6 +60,7 @@ class AlarmFragment: Fragment(){
             //아두이노 센서 및 수면 시작
             settingFragment.bluetoothStart()
 
+
             currentDate = getCurrentDate()
             val currentTime_start = getCurrentTime()
             binding.chronometer.base = SystemClock.elapsedRealtime() + pauseTime
@@ -99,7 +100,7 @@ class AlarmFragment: Fragment(){
 
             binding.chronometer.stop()
             //아두이노 센서 및 수면 종료
-            settingFragment.bluetoothEnd()
+            settingFragment.outputStream?.write("e\n".toByteArray())
         }
 
 
