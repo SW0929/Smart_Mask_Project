@@ -24,6 +24,12 @@ class AlarmFragment: Fragment(){
     private lateinit var databaseHelper: DatabaseHelper
     lateinit var binding: AlarmFragmentBinding
 
+    lateinit var settingFragment: SettingFragment
+
+    override fun onAttachFragment(childFragment: Fragment) {
+        super.onAttachFragment(childFragment)
+        settingFragment = childFragment as SettingFragment
+    }
 
     var alarmTimePicker: TimePicker? = null
     var pendingIntent: PendingIntent? = null
@@ -45,8 +51,15 @@ class AlarmFragment: Fragment(){
 
         var currentDate: String? = null
 
+        settingFragment = SettingFragment()
+
+
+
         //수면 시작 버튼을 누르면 stopWatch 처럼 시간 증가(총 수면 시간을 구할 수 있음)
         binding.sleepStartButton.setOnClickListener {
+            //아두이노 센서 및 수면 시작
+            settingFragment.bluetoothStart()
+
             currentDate = getCurrentDate()
             val currentTime_start = getCurrentTime()
             binding.chronometer.base = SystemClock.elapsedRealtime() + pauseTime
@@ -85,6 +98,8 @@ class AlarmFragment: Fragment(){
             //--> 센서 작동OFF Function
 
             binding.chronometer.stop()
+            //아두이노 센서 및 수면 종료
+            settingFragment.bluetoothEnd()
         }
 
 
