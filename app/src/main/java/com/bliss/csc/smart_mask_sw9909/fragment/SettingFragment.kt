@@ -7,6 +7,7 @@ import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -28,7 +29,6 @@ class SettingFragment: Fragment() {
 
     lateinit var binding: SettingFragmentBinding
 
-    var a: String = "as"
     lateinit var device: BluetoothDevice
     var socket: BluetoothSocket? = null
     var outputStream: OutputStream? = null
@@ -51,81 +51,77 @@ class SettingFragment: Fragment() {
         binding = SettingFragmentBinding.inflate(inflater, container, false)
 
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            requestPermissions(
-                arrayOf(
-                    Manifest.permission.BLUETOOTH,
-                    Manifest.permission.BLUETOOTH_SCAN,
-                    Manifest.permission.BLUETOOTH_ADVERTISE,
-                    Manifest.permission.BLUETOOTH_CONNECT
-                ),
-                1
-            )
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(
-                arrayOf(
-                    Manifest.permission.BLUETOOTH
-                ),
-                1
-            )
-        }
-        //bluetooth On/Off 동작
-        binding.radioGroup.setOnCheckedChangeListener { _, checkedId ->
-
-            when (checkedId) {
-                binding.onRadioButton.id -> {
-
-                    //TODO bluetooth 연결 코드 작성
-
-
-                    val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
-                    if (bluetoothAdapter != null) {
-                        device = bluetoothAdapter.getRemoteDevice(DEVICE_ADDRESS)
-                        ConnectThread().start()
-                        binding.inputText.text = a
-                    }
-
-                    Log.d("on", "on is selected")
-
-
-                }
-
-                binding.offRadioButton.id -> {
-                    //TODO bluetooth 해제 코드 작성
-                    onDestroyView()
-                    Log.d("off", "off is selected")
-                }
+        binding.bluetoothOnButton.setOnClickListener {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                requestPermissions(
+                    arrayOf(
+                        Manifest.permission.BLUETOOTH,
+                        Manifest.permission.BLUETOOTH_SCAN,
+                        Manifest.permission.BLUETOOTH_ADVERTISE,
+                        Manifest.permission.BLUETOOTH_CONNECT
+                    ),
+                    1
+                )
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                requestPermissions(
+                    arrayOf(
+                        Manifest.permission.BLUETOOTH
+                    ),
+                    1
+                )
             }
+            binding.bluetoothOnButton.setBackgroundColor(Color.rgb(153,255,204))
+            binding.bluetoothOffButton.setBackgroundColor(Color.WHITE)
         }
+
+
+
 
         //연결 가능한 bluetooth device listView
-        binding.spdCheckBox.setOnClickListener {
-            if (binding.spdCheckBox.isChecked){
-                binding.devicesRecyclerView.visibility = View.VISIBLE
-            }else{
-                binding.devicesRecyclerView.visibility = View.INVISIBLE
-            }
-        }
+//        binding.spdCheckBox.setOnClickListener {
+//            if (binding.spdCheckBox.isChecked){
+//                binding.devicesRecyclerView.visibility = View.VISIBLE
+//            }else{
+//                binding.devicesRecyclerView.visibility = View.INVISIBLE
+//            }
+//        }
 
-        //bluetooth 연결 가능한 기기 recyclerView 출력
-        val datas = mutableListOf<String>()
-        for(i in 1..20){
-            datas.add("Item $i")
-        }
+//        //bluetooth 연결 가능한 기기 recyclerView 출력
+//        val datas = mutableListOf<String>()
+//        for(i in 1..20){
+//            datas.add("Item $i")
+//        }
 
 
-        val adapter = MyAdapter(datas)
-        val layoutManager = LinearLayoutManager(activity)
-
-        binding.devicesRecyclerView.layoutManager = layoutManager
-        binding.devicesRecyclerView.adapter = adapter
+//        val adapter = MyAdapter(datas)
+//        val layoutManager = LinearLayoutManager(activity)
+//
+//        binding.devicesRecyclerView.layoutManager = layoutManager
+//        binding.devicesRecyclerView.adapter = adapter
 
 
         return binding.root
     }
 
+    //bluetoothStart
+    //TODO bluetooth 연결 코드 작성
+    fun bluetoothStart(){
+        val bluetoothAdapter: BluetoothAdapter? = BluetoothAdapter.getDefaultAdapter()
+        if (bluetoothAdapter != null) {
+            device = bluetoothAdapter.getRemoteDevice(DEVICE_ADDRESS)
+            ConnectThread().start()
+        }
+    }
 
-
+    fun bluetoothEnd(){
+        binding.bluetoothOffButton.setOnClickListener {
+            //TODO bluetooth 해제 코드 작성
+            onDestroyView()
+            binding.bluetoothOffButton.setBackgroundColor(Color.rgb(153,255,204))
+            binding.bluetoothOnButton.setBackgroundColor(Color.WHITE)
+            Log.d("off", "off is selected")
+        }
+    }
 
 
     //bluetooth Thread
@@ -150,9 +146,9 @@ class SettingFragment: Fragment() {
                 val bytes = inputStream?.read(buffer)
                 val receivedData = bytes?.let { String(buffer, 0, it) }
                 if (receivedData != null) {
-                    a = receivedData
+                    //데이터 받아오는 코드드
                 }
-                Log.d(TAG, "Received data: $receivedData")
+               Log.d(TAG, "Received data: $receivedData")
 
             } catch (e: IOException) {
                 Log.e(TAG, "Bluetooth connection failed.", e)
@@ -171,5 +167,6 @@ class SettingFragment: Fragment() {
             Log.e(TAG, "Failed to close the Bluetooth socket.", e)
         }
     }
+
 }
 
