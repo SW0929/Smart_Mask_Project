@@ -27,8 +27,7 @@ import java.util.*
 
 class SettingFragment: Fragment() {
 
-    lateinit var binding: SettingFragmentBinding
-
+    var binding: SettingFragmentBinding? = null
     lateinit var device: BluetoothDevice
     var socket: BluetoothSocket? = null
     var outputStream: OutputStream? = null
@@ -51,7 +50,7 @@ class SettingFragment: Fragment() {
         binding = SettingFragmentBinding.inflate(inflater, container, false)
 
 
-        binding.bluetoothOnButton.setOnClickListener {
+        binding!!.bluetoothOnButton.setOnClickListener {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
                 requestPermissions(
                     arrayOf(
@@ -70,8 +69,8 @@ class SettingFragment: Fragment() {
                     1
                 )
             }
-            binding.bluetoothOnButton.setBackgroundColor(Color.rgb(153,255,204))
-            binding.bluetoothOffButton.setBackgroundColor(Color.WHITE)
+            binding!!.bluetoothOnButton.setBackgroundColor(Color.rgb(153,255,204))
+            binding!!.bluetoothOffButton.setBackgroundColor(Color.WHITE)
         }
 
 
@@ -100,7 +99,7 @@ class SettingFragment: Fragment() {
 //        binding.devicesRecyclerView.adapter = adapter
 
 
-        return binding.root
+        return binding!!.root
     }
 
     //bluetoothStart
@@ -114,11 +113,11 @@ class SettingFragment: Fragment() {
     }
 
     fun bluetoothEnd(){
-        binding.bluetoothOffButton.setOnClickListener {
+        binding!!.bluetoothOffButton.setOnClickListener {
             //TODO bluetooth 해제 코드 작성
             onDestroyView()
-            binding.bluetoothOffButton.setBackgroundColor(Color.rgb(153,255,204))
-            binding.bluetoothOnButton.setBackgroundColor(Color.WHITE)
+            binding!!.bluetoothOffButton.setBackgroundColor(Color.rgb(153,255,204))
+            binding!!.bluetoothOnButton.setBackgroundColor(Color.WHITE)
             Log.d("off", "off is selected")
         }
     }

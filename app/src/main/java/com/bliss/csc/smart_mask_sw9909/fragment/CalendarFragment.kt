@@ -33,7 +33,7 @@ class CalendarFragment: Fragment() {
 //사용자가 원하는 날짜 선택하면 기록 조회
         binding.calendarView.setOnDateChangeListener { calendarView, year, month, dayOfMonth ->
             binding.dateTextView.visibility = View.VISIBLE
-            binding.dateTextView.text = "$year-${String.format("%02d", month+1)}-$dayOfMonth"
+            binding.dateTextView.text = "$year-${String.format("%02d", month+1)}-${String.format("%02d", dayOfMonth)}"
         }
         binding.recordQueryButton.setOnClickListener {
             val datetext = binding.dateTextView.text

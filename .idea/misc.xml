@@ -3,8 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/lch/Desktop/lch/smart_mask_capston/smart_mask_capston/app/src/main/res/layout/activity_main.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/lch/Desktop/lch/smart_mask_capston/smart_mask_capston/app/src/main/res/layout/alarm_fragment.xml" value="0.17916666666666667" />
         <entry key="..\:/Users/lch/Desktop/lch/smart_mask_capston/smart_mask_capston/app/src/main/res/layout/calendar_fragment.xml" value="0.1" />
+        <entry key="..\:/Users/lch/Desktop/lch/smart_mask_capston/smart_mask_capston/app/src/main/res/layout/info_fragment.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/lch/Desktop/lch/smart_mask_capston/smart_mask_capston/app/src/main/res/layout/item_main.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/lch/Desktop/lch/smart_mask_capston/smart_mask_capston/app/src/main/res/layout/setting_fragment.xml" value="0.17916666666666667" />
       </map>
     </option>
   </component>
