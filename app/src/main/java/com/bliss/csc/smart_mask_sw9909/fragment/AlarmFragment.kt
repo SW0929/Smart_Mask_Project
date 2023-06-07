@@ -58,7 +58,7 @@ class AlarmFragment: Fragment(){
         //수면 시작 버튼을 누르면 stopWatch 처럼 시간 증가(총 수면 시간을 구할 수 있음)
         binding.sleepStartButton.setOnClickListener {
             //아두이노 센서 및 수면 시작
-            settingFragment.bluetoothStart()
+            //settingFragment.bluetoothStart()
 
             currentDate = getCurrentDate()
             val currentTime_start = getCurrentTime()
@@ -72,6 +72,33 @@ class AlarmFragment: Fragment(){
 
         //수면 종료
         binding.sleepEndButton.setOnClickListener {
+            val array = arrayOfNulls<Int>(5)
+            array[0] = 2
+            array[1] = 4
+            array[2] = 1
+            array[3] = 1
+            array[4] = 1
+
+            val str_temp :String
+            val str_nosecount :String
+
+            str_temp = array[0].toString() + array[1]
+            println("평균온도값 = $str_temp")
+
+            if (array[2] == null) {
+                str_nosecount = "0"
+                println("코골이횟수 = $str_nosecount")
+            } else if (array[3] == null) {
+                str_nosecount = array[2].toString()
+                println("코골이횟수 = $str_nosecount")
+            } else if (array[4] == null) {
+                str_nosecount = array[2].toString() + array[3]
+                println("코골이횟수 = $str_nosecount")
+            } else {
+                str_nosecount = array[2].toString() + array[3] + array[4]
+                println("코골이횟수 = $str_nosecount")
+            }
+
             val currentTime_finish = getCurrentTime()
             val selectdate = currentDate
             println("수면 시작 시간: $selectdate")
@@ -82,24 +109,23 @@ class AlarmFragment: Fragment(){
             val recordedTimeToSeconds = databaseHelper.convertToSeconds(recordtime.toString()) //기록된 sleepstart를 초로 환산한 값
             val currenttimetoSeconds = databaseHelper.convertToSeconds(currentTime_finish) //수면종료시간(sleepfinish)을 초로 환산한 값
             val converttime = databaseHelper.convertToTime(currenttimetoSeconds-recordedTimeToSeconds) //update (총수면시간)
-            //val averagetemp = databaseHelper.gettempAverage(currentDate) //기록된 온도값들의 평균값 계산
-            //val countnose :Int= databaseHelper.getNoseCount(currentDate) //기록된 코골이값들을 COUNT
 
             println("수면 시작 시간: $recordtime")
             println("수면시작시간의 초환산 값: $recordedTimeToSeconds")
             println("수면 종료 시간: $currentTime_finish")
             println("수면종료시간의 초환산 값: $currenttimetoSeconds")
             println("총수면시간: $converttime")
-            //println("평균온도값: $averagetemp")
-            //println("코골이 횟수 count: $countnose")
+            println("평균온도값: $str_temp")
+            println("코골이 횟수 count: $str_nosecount")
 
-            databaseHelper.updateSleepfinish(selectdate.toString(), recordtime.toString(), currentTime_finish) //수면종료버튼 클릭 시
+
+            databaseHelper.updateSleepfinish(selectdate.toString(), recordtime.toString(), currentTime_finish, str_temp.toInt(), str_nosecount.toInt()) //수면종료버튼 클릭 시
             Toast.makeText(this.context, "TODAY($currentDate) 수면기록이 종료되었습니다.", Toast.LENGTH_SHORT).show()
             //--> 센서 작동OFF Function
 
             binding.chronometer.stop()
             //아두이노 센서 및 수면 종료
-            settingFragment.bluetoothEnd()
+            //settingFragment.bluetoothEnd()
         }
 
 
