@@ -30,7 +30,7 @@ class InfoFragment: Fragment() {
 
         // recyclerView 사용
 
-        val apiKey = "********" // todo 개인 gpt 키 사용
+        val apiKey = "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" // todo 개인 gpt 키 사용
         val baseUrl = "https://api.openai.com/v1/chat/completions"
         val chatGptModel = "gpt-3.5-turbo" // 또는 원하는 ChatGPT 모델 지정
 
@@ -74,19 +74,6 @@ class InfoFragment: Fragment() {
                     }
                 }
             }
-
-//            if (message.isNotEmpty()) {
-//                binding.userInputEditText.text.clear()
-//                chatBot.sendMessage(message) { reply ->
-//                    activity?.runOnUiThread {
-//                        reply?.let {
-//
-//                            binding.chatTextView.append("User: $message\n")
-//                            binding.chatTextView.append("ChatBot: $it\n\n")
-//                        }
-//                    }
-//                }
-//            }
         }
 
         return binding.root

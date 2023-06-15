@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        android:textSize="25sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@id/recordView"
@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:text="수면 시작 시간"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="ex)12:00:00"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 tools:text="07시07분" />
 
         </LinearLayout>
@@ -103,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:text="수면 종료 시간"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -112,7 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="ex)12:00:00"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 tools:text="07시07분" />
 
         </LinearLayout>
@@ -135,7 +135,7 @@
                 android:layout_height="wrap_content"
                 android:text="총 수면 시간"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -144,7 +144,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="ex)00:40:10"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 tools:text="07시07분" />
 
         </LinearLayout>
@@ -164,7 +164,7 @@
                 android:layout_height="wrap_content"
                 android:text="코골이 횟수"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -173,7 +173,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="ex)10회"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 tools:text="11회" />
 
         </LinearLayout>
@@ -191,9 +191,9 @@
                 android:id="@+id/temTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="평균 체온"
+                android:text="평균 온도"
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -201,8 +201,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="ex)36.5°C"
-                android:textSize="20sp"
+                android:text="ex)24°"
+                android:textSize="15sp"
                 tools:text="36.5°C" />
 
         </LinearLayout>

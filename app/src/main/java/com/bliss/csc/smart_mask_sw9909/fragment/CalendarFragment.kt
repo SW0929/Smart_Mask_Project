@@ -51,7 +51,7 @@ class CalendarFragment: Fragment() {
                 binding.startSleepValueTextView.text = column2Value
                 binding.endSleepValueTextView.text = column3Value
                 binding.totalSleepValueTextView.text = column4Value
-                binding.temValueTextView.text = column5Value + "°C"
+                binding.temValueTextView.text = column5Value + "°"
                 binding.snoreValueTextView.text = column6Value + "회"
             } else {
                 println("not found")

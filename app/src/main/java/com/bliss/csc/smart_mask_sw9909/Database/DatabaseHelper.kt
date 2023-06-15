@@ -116,7 +116,7 @@ class DatabaseHelper(context: Context) :
     }
 
     //수면종료 버튼 클릭 시, COL(수면종료시간, 총수면시간, 평균온도값, 코골이횟수) UPDATE
-    fun updateSleepfinish(userPK: String, starttime: String, finishtime: String, str_temp: Int, str_nosecount: Int): Boolean {
+    fun updateSleepfinish(userPK: String, starttime: String, finishtime: String): Boolean {
         val recordedTimeToSeconds = convertToSeconds(starttime.toString()) //starttime 초환산
         val currenttimetoSeconds = convertToSeconds(finishtime) //finishtime 초환산
         val converttime = convertToTime(currenttimetoSeconds-recordedTimeToSeconds) //update수면시간
@@ -125,8 +125,19 @@ class DatabaseHelper(context: Context) :
         val values = ContentValues()
         values.put(U_COLUMN_SleepFinish, finishtime)
         values.put(U_COLUMN_Sleeptime, converttime)
-        values.put(U_COLUMN_Averagetemp, str_temp)
-        values.put(U_COLUMN_Nosecount, str_nosecount)
+
+        val rowsAffected = db.update(UserTABLE_NAME, values, "$U_COLUMN_PK = ?", arrayOf(userPK.toString()))
+        db.close()
+
+        return rowsAffected > 0
+    }
+
+    fun updatetempnose(userPK: String, tempaverage: Int, nosecount: Int): Boolean {
+        val db = this.writableDatabase
+        val values = ContentValues()
+
+        values.put(U_COLUMN_Averagetemp, tempaverage)
+        values.put(U_COLUMN_Nosecount, nosecount)
 
         val rowsAffected = db.update(UserTABLE_NAME, values, "$U_COLUMN_PK = ?", arrayOf(userPK.toString()))
         db.close()
